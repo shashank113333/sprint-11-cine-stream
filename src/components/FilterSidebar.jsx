@@ -21,7 +21,7 @@ const GENRES = [
   { id: '16', name: 'Animation' },
 ];
 
-const YEARS = ['all', '2024', '2023', '2022', '2021', '2020'];
+const YEARS = ['all', ...Array.from({ length: 56 }, (_, i) => String(2025 - i))];
 
 export const FilterSidebar = () => {
   const dispatch = useDispatch();

@@ -50,6 +50,8 @@ export default function HomeClient({ initialMovies = [] }) {
           data = await searchMovies(debouncedSearchTerm, targetPage);
         } else if (selectedGenre !== 'all' && GENRE_MAP[selectedGenre]) {
           data = await searchMovies(GENRE_MAP[selectedGenre], targetPage);
+        } else if (selectedYear !== 'all') {
+          data = await searchMovies(selectedYear, targetPage);
         } else {
           data = await fetchPopularMovies(targetPage);
         }
@@ -65,12 +67,12 @@ export default function HomeClient({ initialMovies = [] }) {
         setLoadingMore(false);
       }
     },
-    [debouncedSearchTerm, selectedGenre]
+    [debouncedSearchTerm, selectedGenre, selectedYear]
   );
 
   useEffect(() => {
     loadData(1, false);
-  }, [debouncedSearchTerm, selectedGenre, loadData]);
+  }, [debouncedSearchTerm, selectedGenre, selectedYear, loadData]);
 
   useEffect(() => {
     const sentinel = sentinelRef.current;
@@ -184,6 +186,8 @@ export default function HomeClient({ initialMovies = [] }) {
                 ? `Results for "${debouncedSearchTerm}"`
                 : selectedGenre !== 'all' && GENRE_MAP[selectedGenre]
                 ? `${GENRE_MAP[selectedGenre]} Movies`
+                : selectedYear !== 'all'
+                ? `Movies from ${selectedYear}`
                 : 'Trending & Popular Movies'}
             </h1>
             <span style={{ color: '#cbd5e1', fontSize: '0.85rem' }}>
