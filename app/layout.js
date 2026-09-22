@@ -3,7 +3,7 @@ import { Navbar } from '@/src/components/Navbar';
 import { ReduxProvider } from '@/src/store/Providers';
 
 export const metadata = {
-  metadataBase: new URL('https://sprint-10-cine-stream.vercel.app'),
+  metadataBase: new URL('https://sprint-11-cine-stream.vercel.app'),
   title: {
     default: 'Cine-Stream | Next.js 15 Redux Movie Discovery SPA',
     template: '%s | Cine-Stream',
@@ -27,7 +27,7 @@ export const metadata = {
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: 'https://sprint-10-cine-stream.vercel.app',
+    url: 'https://sprint-11-cine-stream.vercel.app',
     title: 'Cine-Stream | Redux Movie Discovery SPA',
     description: 'Explore trending movies, filter by genre and rating, and manage your favorites with Redux Toolkit.',
     siteName: 'Cine-Stream',
