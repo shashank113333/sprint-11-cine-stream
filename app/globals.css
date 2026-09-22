@@ -411,9 +411,7 @@ body {
     gap: 12px;
   }
 }
-/* ==========================================================================
-   Filter Sidebar & Grid Layout Styling
-   ========================================================================== */
+
 .sidebar-layout {
   display: flex;
   gap: 28px;
@@ -534,11 +532,7 @@ body {
     position: static;
   }
 }
-/* ==========================================================================
-   Redux Global Themes (Light & Cyberpunk Modes)
-   ========================================================================== */
 
-/* 1. Light Theme */
 [data-theme="light"] {
   --bg-main: #f1f5f9;
   --bg-surface: rgba(255, 255, 255, 0.95);
@@ -551,7 +545,6 @@ body {
   --border-highlight: rgba(0, 0, 0, 0.25);
 }
 
-/* 2. Cyberpunk Neon Theme */
 [data-theme="cyberpunk"] {
   --bg-main: #090014;
   --bg-surface: rgba(250, 0, 255, 0.1);
@@ -566,18 +559,16 @@ body {
   --border-subtle: rgba(0, 240, 255, 0.3);
   --border-neon: rgba(0, 240, 255, 0.8);
 }
-/* Accessibility Focus Rings for Keyboard Navigation */
+
 :focus-visible {
   outline: 2px solid var(--color-primary);
   outline-offset: 3px;
 }
 
-/* Touch Target Minimum Sizing */
 button, select, input {
   min-height: 38px;
 }
 
-/* Mobile & Desktop Responsive Layout System */
 .sidebar-layout {
   display: flex;
   gap: 28px;

@@ -1,5 +1,4 @@
 "use client";
-
 import { useSelector, useDispatch } from 'react-redux';
 import { toggleFavorite } from '@/src/store/slices/favoritesSlice';
 import { MovieGrid } from '@/src/components/MovieGrid';
