@@ -26,6 +26,16 @@ export default function HomeClient({ initialMovies = [] }) {
     (state) => state.filters
   );
 
+  const GENRE_MAP = {
+    '28': 'Action',
+    '35': 'Comedy',
+    '18': 'Drama',
+    '878': 'Sci-Fi',
+    '27': 'Horror',
+    '10749': 'Romance',
+    '16': 'Animation',
+  };
+
   const loadData = useCallback(
     async (targetPage, isAppend = false) => {
       if (isAppend) {
@@ -38,6 +48,8 @@ export default function HomeClient({ initialMovies = [] }) {
         let data;
         if (debouncedSearchTerm.trim()) {
           data = await searchMovies(debouncedSearchTerm, targetPage);
+        } else if (selectedGenre !== 'all' && GENRE_MAP[selectedGenre]) {
+          data = await searchMovies(GENRE_MAP[selectedGenre], targetPage);
         } else {
           data = await fetchPopularMovies(targetPage);
         }
@@ -53,18 +65,12 @@ export default function HomeClient({ initialMovies = [] }) {
         setLoadingMore(false);
       }
     },
-    [debouncedSearchTerm]
+    [debouncedSearchTerm, selectedGenre]
   );
 
   useEffect(() => {
-    if (debouncedSearchTerm.trim()) {
-      loadData(1, false);
-    } else if (page === 1 && initialMovies.length > 0) {
-      setMovies(initialMovies);
-    } else {
-      loadData(1, false);
-    }
-  }, [debouncedSearchTerm]);
+    loadData(1, false);
+  }, [debouncedSearchTerm, selectedGenre, loadData]);
 
   useEffect(() => {
     const sentinel = sentinelRef.current;
@@ -174,7 +180,11 @@ export default function HomeClient({ initialMovies = [] }) {
         <div style={{ flex: 1 }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: '20px' }}>
             <h1 style={{ fontSize: '1.3rem', fontWeight: 700 }}>
-              {debouncedSearchTerm.trim() ? `Results for "${debouncedSearchTerm}"` : 'Trending & Popular Movies'}
+              {debouncedSearchTerm.trim()
+                ? `Results for "${debouncedSearchTerm}"`
+                : selectedGenre !== 'all' && GENRE_MAP[selectedGenre]
+                ? `${GENRE_MAP[selectedGenre]} Movies`
+                : 'Trending & Popular Movies'}
             </h1>
             <span style={{ color: '#cbd5e1', fontSize: '0.85rem' }}>
               Showing: {filteredMovies.length} of {movies.length} movies
